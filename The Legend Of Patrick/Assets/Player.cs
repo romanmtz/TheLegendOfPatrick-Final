@@ -4,45 +4,61 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
-    public int healthPoints = 3;
-    public float speed =  3.0f;
-    public float jumpforce = 5f;
-
     Rigidbody2D rb;
-    //Awake is called before start
+
+    public float speed =  3.0f;
+    public float buttonTime = 0.5f;
+    public float jumpHeight = 5;
+    public float cancelRate = 100;
+    float jumpTime;
+    bool jumping;
+    bool jumpCancelled;
+
+    
+    
     void Awake()
     {
-
-        Debug.Log("Awake is Called");
-
         rb = GetComponent<Rigidbody2D>();
-       
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Start is Called");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log("new frame");
-
-    }
+    
 
     public void Move(int direction){
 
-        // transform.position += direction * speed * Time.deltaTime;
         rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 
     }
 
-    public void Jump(){
+    public void Jump(bool jump){
+        
+        if(jump){
+        float jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rb.gravityScale));
+        rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        jumping = true;
+        jumpCancelled = false;
+        jumpTime = 0;
+        }
+            
+        if (jumping)
+        {
+            jumpTime += Time.deltaTime;
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                jumpCancelled = true;
+            }
+            if (jumpTime > buttonTime)
+            {
+                jumping = false;
+            }
+        }
+    }
 
-       rb.AddForce(Vector3.up * jumpforce, ForceMode2D.Impulse);
 
+    void FixedUpdate()
+    {
+        if(jumpCancelled && jumping && rb.velocity.y > 0)
+        {
+            rb.AddForce(Vector2.down * cancelRate);
+        }
     }
 
 }

@@ -6,24 +6,30 @@ public class PlayerInputController : MonoBehaviour
 {
   
     Player roman;
-    // Start is called before the first frame update
+
+
+   
     void Awake()
     {
         roman = GetComponent<Player>();
+
+
     }
 
-    // Update is called once per frame
+ 
 
     void Update(){
 
-        if(Input.GetKeyDown(KeyCode.Space)){
+        
 
-            Debug.Log("Pressing Space!");
-            roman.Jump();
+        roman.Jump(Input.GetKeyDown(KeyCode.Space));
 
-        }
-
+        
+        
     }
+        
+
+
 
     void FixedUpdate()
     {
