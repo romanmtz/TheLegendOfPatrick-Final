@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PlayerInputController : MonoBehaviour
 {
-  
+
     Player roman;
 
 
-   
     void Awake()
     {
-        roman = GetComponent<Player>();
 
+        roman = GetComponent<Player>();
 
     }
 
@@ -20,11 +19,7 @@ public class PlayerInputController : MonoBehaviour
 
     void Update(){
 
-        
-
         roman.Jump(Input.GetKeyDown(KeyCode.Space));
-
-        
         
     }
         
@@ -34,15 +29,8 @@ public class PlayerInputController : MonoBehaviour
     void FixedUpdate()
     {
 
-        
+       roman.Move(Input.GetAxisRaw("Horizontal"));
 
-            
-            roman.Move(Input.GetAxisRaw("Horizontal"));
-
-    
-      
-
-        
     }
 
 
