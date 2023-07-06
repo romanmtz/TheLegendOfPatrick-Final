@@ -34,18 +34,13 @@ public class PlayerInputController : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(Input.GetKey(KeyCode.D)){
+        
 
-            Debug.Log("Pressing D!");
-            roman.Move(1);
+            
+            roman.Move(Input.GetAxisRaw("Horizontal"));
 
-        }
-        else if(Input.GetKey(KeyCode.A)){
-
-            Debug.Log("Pressing A!");
-            roman.Move(-1);
-
-        }
+    
+      
 
         
     }
