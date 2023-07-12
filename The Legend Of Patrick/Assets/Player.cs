@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     float wallJumpingDirection;
     float wallJumpingTime = 0.2f;
     float wallJumpingCounter;
-    float wallJumpingDuration = 0.4f;
+    float wallJumpingDuration = 0.2f;
     Vector2 wallJumpingPower = new Vector2(10f, 20f);
 
 
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
         if (jumping)
         {
             jumpTime += Time.deltaTime;
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetButtonUp("Jump"))
             {
                 jumpCancelled = true;
             }
@@ -158,7 +158,6 @@ public class Player : MonoBehaviour
     }
 
 
-
     void Flip()
     {
 
@@ -181,6 +180,7 @@ public class Player : MonoBehaviour
         {
             Flip();
         }
+
     }
 
 
@@ -191,6 +191,8 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(Vector2.down * cancelRate);
         }
+
+
     }
 
 }
