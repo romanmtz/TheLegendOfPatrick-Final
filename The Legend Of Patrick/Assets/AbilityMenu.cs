@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using TMPro;
 public class AbilityMenu : MonoBehaviour
 {
 
@@ -16,6 +16,10 @@ public class AbilityMenu : MonoBehaviour
     public GameObject reverseButton;
     public GameObject cryosisButton;
     public MenuInputSwitcher menuInputSwitcher;
+
+    public TextMeshProUGUI abilitytext;
+
+    
     public static bool GameIsChoose = false;
 
 
@@ -87,26 +91,25 @@ public class AbilityMenu : MonoBehaviour
         if (isButtonSelected(ascendButton))
         {
 
-            Debug.Log("Ascend Mode");
-
+            abilitytext.text = "ascend mode";
         }
 
         if (isButtonSelected(kinisisButton))
         {
 
-            Debug.Log("Kinisis Mode");
+            abilitytext.text = "kinesis mode";
 
         }
         if (isButtonSelected(cryosisButton))
         {
 
-            Debug.Log("Cryosis Mode");
+            abilitytext.text = "cryosis mode";
 
         }
         if (isButtonSelected(reverseButton))
         {
 
-            Debug.Log("Reverse Mode");
+            abilitytext.text = "reverse mode";
 
         }
 
