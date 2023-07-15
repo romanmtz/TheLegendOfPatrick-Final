@@ -7,6 +7,7 @@ public class AbilityMenu : MonoBehaviour
 {
 
     // public GameObject selectedButton;
+    public EventSystem pauseEventSystem;
     public GameObject selectedMode;
     public GameObject abilityMenuUI;
     public GameObject abilityFirstButton;
@@ -15,11 +16,6 @@ public class AbilityMenu : MonoBehaviour
     public GameObject reverseButton;
     public GameObject cryosisButton;
     public MenuInputSwitcher menuInputSwitcher;
-
-
-
-
-
     public static bool GameIsChoose = false;
 
 
@@ -28,6 +24,7 @@ public class AbilityMenu : MonoBehaviour
 
     private void Awake()
     {
+
         abilityMenuUI.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
     }
@@ -45,9 +42,6 @@ public class AbilityMenu : MonoBehaviour
                 GameIsChoose = true;
 
                 menuInputSwitcher.SwitchToAbilityEventSystem();
-
-
-
 
             }
 
@@ -72,10 +66,14 @@ public class AbilityMenu : MonoBehaviour
 
     }
 
+
     private void Update()
     {
-        if(EventSystem.current.currentSelectedGameObject != abilityFirstButton)
-        selectedMode = EventSystem.current.currentSelectedGameObject;
+
+        if(EventSystem.current != null && EventSystem.current != pauseEventSystem){
+        if (EventSystem.current.currentSelectedGameObject != abilityFirstButton )
+            selectedMode = EventSystem.current.currentSelectedGameObject;
+        }
 
 
         if (Input.GetAxisRaw("Mouse X") == 0 && Input.GetAxisRaw("Mouse Y") == 0 && GameIsChoose)
@@ -112,11 +110,15 @@ public class AbilityMenu : MonoBehaviour
 
         }
 
+        if(!GameIsChoose){
+            menuInputSwitcher.TurnOffEventSystems(true);
+        }
 
-
+   
 
 
     }
+
 
 
 }

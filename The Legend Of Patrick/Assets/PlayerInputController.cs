@@ -28,7 +28,7 @@ public class PlayerInputController : MonoBehaviour
     {
 
         if (!PauseMenu.GameIsPaused)
-            roman.Jump(Input.GetButtonDown("Jump"));
+            roman.Movement(Input.GetAxisRaw("Horizontal"), Input.GetButtonDown("Jump"), Input.GetButtonUp("Jump"));
 
         if (Input.GetButtonDown("Pause") && !AbilityMenu.GameIsChoose)
         {
@@ -45,7 +45,7 @@ public class PlayerInputController : MonoBehaviour
     void FixedUpdate()
     {
 
-        roman.Move(Input.GetAxisRaw("Horizontal"));
+       
         
         if (!PauseMenu.GameIsPaused)
         {

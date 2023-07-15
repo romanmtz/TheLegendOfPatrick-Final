@@ -10,9 +10,11 @@ public class MenuInputSwitcher : MonoBehaviour
     public GameObject AbilityEventSystem;
 
 
-    // private void Awake() {
-    //     SwitchToPauseEventSystem();
-    // }
+    private void Awake()
+    {
+        PauseEventSystem.SetActive(false);
+        AbilityEventSystem.SetActive(false);
+    }
     public void SwitchToAbilityEventSystem()
     {
 
@@ -24,6 +26,17 @@ public class MenuInputSwitcher : MonoBehaviour
     {
         PauseEventSystem.SetActive(true);
         AbilityEventSystem.SetActive(false);
+
+    }
+    public void TurnOffEventSystems(bool option)
+    {
+
+        if (AbilityEventSystem != null && option == true)
+            AbilityEventSystem.SetActive(false);
+        else{
+            PauseEventSystem.SetActive(false);
+        }
+
 
     }
 

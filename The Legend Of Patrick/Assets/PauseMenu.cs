@@ -7,11 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public GameObject pauseFirstButton;
-
     public MenuInputSwitcher menuInputSwitcher;
-
     public static bool GameIsPaused = false;
-    // Start is called before the first frame update
 
     void Awake()
     {
@@ -42,9 +39,21 @@ public class PauseMenu : MonoBehaviour
         }
 
     }
-    public void MainMenu(){
+
+   
+    public void MainMenu()
+    {
 
         Debug.Log("Switching to Main Menu Scene!");
 
     }
+
+    private void Update() {
+        if(!GameIsPaused){
+
+            menuInputSwitcher.TurnOffEventSystems(false);
+
+        }
+    }
+
 }
