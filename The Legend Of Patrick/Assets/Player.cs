@@ -30,8 +30,15 @@ public class Player : MonoBehaviour
 
     public float ascendRange = 5f;
     public float kinesisRange = 20f;
-    public Camera mainCamera;
+    public GameObject virtualMouse;
 
+    Vector2 previousScreenPosition;
+    bool usingVirtualMouse = false;
+    // public Camera mainCamera;
+
+    Vector2 idleScreenPosition;
+
+    public float cursorSensitivity = 0.2f;
 
 
     Rigidbody2D movingObject;
@@ -149,6 +156,7 @@ public class Player : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
+
         }
     }
 
@@ -180,14 +188,60 @@ public class Player : MonoBehaviour
 
     }
 
-    public void Kinesis(Vector3 mousePosition, bool hold)
+    public void Kinesis(Vector3 mousePosition, bool hold, float horizontal, float vertical)
     {
 
-        Vector2 screenPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-        Vector2 direction = (screenPosition - (Vector2)transform.position).normalized;
-        float distance = Vector2.Distance(screenPosition, transform.position);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, Mathf.Clamp(distance, 0, kinesisRange));
-        Debug.DrawRay(transform.position + new Vector3(0.5f, 0f), direction * distance);
+
+        virtualMouse.SetActive(true);
+        Vector2 screenPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        if (horizontal != 0 || vertical != 0)
+        {
+            usingVirtualMouse = true;
+            Debug.Log("using virtual mouse");
+
+        }
+
+        if (screenPosition != previousScreenPosition)
+        {
+
+            usingVirtualMouse = false;
+            Debug.Log("using cursor");
+        }
+
+        previousScreenPosition = screenPosition;
+
+
+        float distance = 0;
+        Vector2 direction = Vector2.zero;
+
+
+        if (!usingVirtualMouse)
+        {
+            virtualMouse.transform.position = screenPosition;
+            direction = (screenPosition - (Vector2)transform.position).normalized;
+            distance = Vector2.Distance(screenPosition, transform.position);
+        }
+
+        if (usingVirtualMouse)
+        {
+            direction = ((Vector2)virtualMouse.transform.position - (Vector2)transform.position).normalized;
+            virtualMouse.transform.position += new Vector3(horizontal * cursorSensitivity, vertical * cursorSensitivity, 0);
+            distance = Vector2.Distance(virtualMouse.transform.position, transform.position);
+        }
+
+
+        RaycastHit2D hit;
+        if (isFacingRight)
+        {
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance);
+            Debug.DrawRay(transform.position + new Vector3(0.5f, 0f), direction * distance);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0f), direction, distance);
+            Debug.DrawRay(transform.position + new Vector3(-0.5f, 0f), direction * distance);
+        }
 
 
         if (hold)
@@ -200,32 +254,56 @@ public class Player : MonoBehaviour
                     movingObject = hit.collider.attachedRigidbody;
 
                 }
+                else if (hit.collider.CompareTag("Player"))
+                {
 
+
+                    Debug.Log("hitting player");
+                    isFacingRight = !isFacingRight;
+                    Vector3 localScale = transform.localScale;
+                    localScale.x *= -1f;
+                    transform.localScale = localScale;
+
+                }
             }
 
-            if (movingObject != null && distance < kinesisRange)
+            if (movingObject != null)
             {
-                Vector2 targetPosition = screenPosition - movingObject.velocity * Time.deltaTime;
-                movingObject.MovePosition(targetPosition);
 
+                if (distance < kinesisRange)
+                {
+                    Vector2 targetPosition = (Vector2)virtualMouse.transform.position;
+                    movingObject.MovePosition(targetPosition);
+
+                }
+                else
+                {
+
+                    movingObject.velocity = Vector2.zero;
+                    movingObject = null;
+
+                }
             }
-
-            if(movingObject != null)
-            movingObject.velocity = Vector3.zero;
-
-
         }
 
         if (!hold)
         {
-            movingObject = null;
+
+            if (movingObject != null)
+            {
+                movingObject.velocity = Vector2.zero;
+                movingObject = null;
+            }
+
+            if (usingVirtualMouse)
+            {
+                virtualMouse.transform.position = transform.position;
+            }
+
+            virtualMouse.SetActive(false);
+
         }
     }
-
-
-
-
-
 
 }
 

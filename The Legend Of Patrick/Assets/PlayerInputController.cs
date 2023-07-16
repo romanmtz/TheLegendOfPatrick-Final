@@ -11,7 +11,6 @@ public class PlayerInputController : MonoBehaviour
 
 
 
-
     void Awake()
     {
 
@@ -46,7 +45,13 @@ public class PlayerInputController : MonoBehaviour
         if (AbilityMenu.AbilityMode == "kinesis")
         {
 
-            roman.Kinesis(Input.mousePosition, Input.GetButton("Fire"));
+
+
+        
+            // Cursor.visible = false;
+            roman.Kinesis(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
+
 
         }
 
