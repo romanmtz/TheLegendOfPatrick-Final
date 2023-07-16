@@ -6,7 +6,6 @@ using TMPro;
 public class AbilityMenu : MonoBehaviour
 {
 
-    // public GameObject selectedButton;
     public EventSystem pauseEventSystem;
     public GameObject selectedMode;
     public GameObject abilityMenuUI;
@@ -16,13 +15,9 @@ public class AbilityMenu : MonoBehaviour
     public GameObject reverseButton;
     public GameObject cryosisButton;
     public MenuInputSwitcher menuInputSwitcher;
-
     public TextMeshProUGUI abilitytext;
-
-    
     public static bool GameIsChoose = false;
-
-
+    public static string AbilityMode;
 
     Rigidbody2D rb;
 
@@ -31,6 +26,7 @@ public class AbilityMenu : MonoBehaviour
 
         abilityMenuUI.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     public void Choose(bool choose)
@@ -74,9 +70,10 @@ public class AbilityMenu : MonoBehaviour
     private void Update()
     {
 
-        if(EventSystem.current != null && EventSystem.current != pauseEventSystem){
-        if (EventSystem.current.currentSelectedGameObject != abilityFirstButton )
-            selectedMode = EventSystem.current.currentSelectedGameObject;
+        if (EventSystem.current != null && EventSystem.current != pauseEventSystem)
+        {
+            if (EventSystem.current.currentSelectedGameObject != abilityFirstButton)
+                selectedMode = EventSystem.current.currentSelectedGameObject;
         }
 
 
@@ -90,34 +87,38 @@ public class AbilityMenu : MonoBehaviour
 
         if (isButtonSelected(ascendButton))
         {
-
             abilitytext.text = "ascend mode";
+            AbilityMode = "ascend";
         }
 
         if (isButtonSelected(kinisisButton))
         {
 
             abilitytext.text = "kinesis mode";
+            AbilityMode = "kinesis";
 
         }
         if (isButtonSelected(cryosisButton))
         {
 
             abilitytext.text = "cryosis mode";
+            AbilityMode = "cryosis";
 
         }
         if (isButtonSelected(reverseButton))
         {
 
             abilitytext.text = "reverse mode";
+            AbilityMode = "reverse";
 
         }
 
-        if(!GameIsChoose){
+        if (!GameIsChoose)
+        {
             menuInputSwitcher.TurnOffEventSystems(true);
         }
 
-   
+
 
 
     }

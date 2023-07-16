@@ -8,7 +8,7 @@ public class PlayerInputController : MonoBehaviour
     public PauseMenu menu;
     public AbilityMenu amenu;
 
-   
+
 
 
 
@@ -16,7 +16,7 @@ public class PlayerInputController : MonoBehaviour
     {
 
         roman = GetComponent<Player>();
-       
+
 
 
     }
@@ -26,14 +26,33 @@ public class PlayerInputController : MonoBehaviour
 
     void Update()
     {
-
-        if (!PauseMenu.GameIsPaused)
-            roman.Movement(Input.GetAxisRaw("Horizontal"), Input.GetButtonDown("Jump"), Input.GetButtonUp("Jump"));
-
         if (Input.GetButtonDown("Pause") && !AbilityMenu.GameIsChoose)
         {
             menu.Pause();
         }
+
+        if (!PauseMenu.GameIsPaused)
+        {
+            roman.Movement(Input.GetAxisRaw("Horizontal"), Input.GetButtonDown("Jump"), Input.GetButtonUp("Jump"));
+        }
+
+        if (AbilityMenu.AbilityMode == "ascend")
+        {
+
+            roman.Ascend(Input.GetButtonUp("Fire"));
+
+        }
+
+        if (AbilityMenu.AbilityMode == "kinesis")
+        {
+
+            roman.Kinesis(Input.mousePosition, Input.GetButton("Fire"));
+
+        }
+
+
+
+
 
 
         if (PauseMenu.GameIsPaused)
@@ -45,12 +64,14 @@ public class PlayerInputController : MonoBehaviour
     void FixedUpdate()
     {
 
-       
-        
+
+
         if (!PauseMenu.GameIsPaused)
         {
             amenu.Choose(Input.GetButton("Abilities"));
         }
+
+
     }
 
 
