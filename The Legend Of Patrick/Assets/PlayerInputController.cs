@@ -44,14 +44,14 @@ public class PlayerInputController : MonoBehaviour
 
         if (AbilityMenu.AbilityMode == "kinesis")
         {
-
-
-
-        
             // Cursor.visible = false;
             roman.Kinesis(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
+        }
 
+        if(AbilityMenu.AbilityMode == "reverse"){
+
+            roman.Reverse(Input.mousePosition, Input.GetButton("Fire"),Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         }
 

@@ -30,18 +30,26 @@ public class Player : MonoBehaviour
 
     public float ascendRange = 5f;
     public float kinesisRange = 20f;
+    public float reverseRange = 20f;
     public GameObject virtualMouse;
 
     Vector2 previousScreenPosition;
+
+
     bool usingVirtualMouse = false;
     // public Camera mainCamera;
 
     Vector2 idleScreenPosition;
 
     public float cursorSensitivity = 0.2f;
-
+    GameObject reversingObject;
 
     Rigidbody2D movingObject;
+
+    GameObject previousReversingObject;
+    bool waitForPlayer = false;
+    bool waitForGameObject = false;
+    bool isReversing = false;
 
 
 
@@ -51,6 +59,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         groundCheck = GameObject.Find("Ground Check").GetComponent<Transform>();
         wallCheck = GameObject.Find("Wall Check").GetComponent<Transform>();
+        reversingObject = GetComponent<GameObject>();
 
     }
 
@@ -160,6 +169,86 @@ public class Player : MonoBehaviour
         }
     }
 
+    RaycastHit2D Raycast(Vector3 mousePosition, float horizontal, float vertical)
+    {
+
+        RaycastHit2D hit;
+        virtualMouse.SetActive(true);
+        Vector2 screenPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        if (horizontal != 0 || vertical != 0)
+        {
+
+            usingVirtualMouse = true;
+            Debug.Log("using virtual mouse");
+
+        }
+
+        if (screenPosition != previousScreenPosition)
+        {
+
+            usingVirtualMouse = false;
+            Debug.Log("using cursor");
+        }
+
+        previousScreenPosition = screenPosition;
+
+
+        float distance = 0;
+        Vector2 direction = Vector2.zero;
+
+
+        if (!usingVirtualMouse)
+        {
+
+            virtualMouse.transform.position = screenPosition;
+            direction = (screenPosition - (Vector2)transform.position).normalized;
+            distance = Vector2.Distance(screenPosition, transform.position);
+        }
+
+        if (usingVirtualMouse)
+        {
+            direction = ((Vector2)virtualMouse.transform.position - (Vector2)transform.position).normalized;
+            virtualMouse.transform.position += new Vector3(horizontal * cursorSensitivity, vertical * cursorSensitivity, 0);
+            distance = Vector2.Distance(virtualMouse.transform.position, transform.position);
+        }
+
+
+
+        if (isFacingRight)
+        {
+
+            Debug.DrawRay(transform.position + new Vector3(0.5f, 0f), direction * distance);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance);
+
+        }
+        else
+        {
+            Debug.DrawRay(transform.position + new Vector3(-0.5f, 0f), direction * distance);
+            hit = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0f), direction, distance);
+
+        }
+
+        if (hit.collider != null)
+        {
+
+            if (hit.collider.CompareTag("Player"))
+            {
+
+                Debug.Log("hitting player");
+                isFacingRight = !isFacingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+
+            }
+        }
+
+        return hit;
+
+
+    }
+
     public void Ascend(bool ascend)
     {
 
@@ -188,60 +277,13 @@ public class Player : MonoBehaviour
 
     }
 
+
+
     public void Kinesis(Vector3 mousePosition, bool hold, float horizontal, float vertical)
     {
 
 
-        virtualMouse.SetActive(true);
-        Vector2 screenPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        if (horizontal != 0 || vertical != 0)
-        {
-            usingVirtualMouse = true;
-            Debug.Log("using virtual mouse");
-
-        }
-
-        if (screenPosition != previousScreenPosition)
-        {
-
-            usingVirtualMouse = false;
-            Debug.Log("using cursor");
-        }
-
-        previousScreenPosition = screenPosition;
-
-
-        float distance = 0;
-        Vector2 direction = Vector2.zero;
-
-
-        if (!usingVirtualMouse)
-        {
-            virtualMouse.transform.position = screenPosition;
-            direction = (screenPosition - (Vector2)transform.position).normalized;
-            distance = Vector2.Distance(screenPosition, transform.position);
-        }
-
-        if (usingVirtualMouse)
-        {
-            direction = ((Vector2)virtualMouse.transform.position - (Vector2)transform.position).normalized;
-            virtualMouse.transform.position += new Vector3(horizontal * cursorSensitivity, vertical * cursorSensitivity, 0);
-            distance = Vector2.Distance(virtualMouse.transform.position, transform.position);
-        }
-
-
-        RaycastHit2D hit;
-        if (isFacingRight)
-        {
-            hit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance);
-            Debug.DrawRay(transform.position + new Vector3(0.5f, 0f), direction * distance);
-        }
-        else
-        {
-            hit = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0f), direction, distance);
-            Debug.DrawRay(transform.position + new Vector3(-0.5f, 0f), direction * distance);
-        }
+        RaycastHit2D hit = Raycast(mousePosition, horizontal, vertical);
 
 
         if (hold)
@@ -254,23 +296,13 @@ public class Player : MonoBehaviour
                     movingObject = hit.collider.attachedRigidbody;
 
                 }
-                else if (hit.collider.CompareTag("Player"))
-                {
 
-
-                    Debug.Log("hitting player");
-                    isFacingRight = !isFacingRight;
-                    Vector3 localScale = transform.localScale;
-                    localScale.x *= -1f;
-                    transform.localScale = localScale;
-
-                }
             }
 
             if (movingObject != null)
             {
 
-                if (distance < kinesisRange)
+                if (hit.distance < kinesisRange)
                 {
                     Vector2 targetPosition = (Vector2)virtualMouse.transform.position;
                     movingObject.MovePosition(targetPosition);
@@ -295,15 +327,59 @@ public class Player : MonoBehaviour
                 movingObject = null;
             }
 
-            if (usingVirtualMouse)
-            {
-                virtualMouse.transform.position = transform.position;
-            }
-
+            virtualMouse.transform.position = transform.position;
             virtualMouse.SetActive(false);
 
         }
     }
 
+    public void Reverse(Vector3 mousePosition, bool hold, float horizontal, float vertical)
+    {
+
+         RaycastHit2D hit = Raycast(mousePosition, horizontal, vertical);
+
+
+        if (hold)
+        {
+            if (hit.collider != null)
+            {
+                if (hit.collider.CompareTag("Moveable"))
+                {
+                    Debug.Log("Moveable");
+                    reversingObject = hit.collider.gameObject;
+
+                }
+
+            }
+
+            if (reversingObject != null)
+            {
+
+                if (hit.distance < kinesisRange)
+                {
+                    Debug.Log("reversing");
+
+                }
+             
+            }
+        }
+
+        if (!hold)
+        {
+
+            if (reversingObject != null)
+            {
+                //reversingObject.reverse();
+                Debug.Log("Stop Reversing");
+                reversingObject = null;
+            }
+
+            virtualMouse.transform.position = transform.position;
+            virtualMouse.SetActive(false);
+
+        }
+
+
+    }
 }
 
