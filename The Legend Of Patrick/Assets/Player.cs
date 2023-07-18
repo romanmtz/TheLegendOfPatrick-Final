@@ -6,7 +6,13 @@ public class Player : MonoBehaviour
 {
     float horizontal;
     public float speed = 9f;
+    public float normalSpeed = 9f;
+    public float cryosisSpeed = 18f;
+    
+    
+
     public float jumpingPower = 3f;
+    public float iceJumpingPower = 10f;
     bool isFacingRight = true;
 
 
@@ -22,6 +28,8 @@ public class Player : MonoBehaviour
 
     public LayerMask groundLayer;
     public LayerMask wallLayer;
+
+    public LayerMask objectLayer;
 
     Transform groundCheck;
     Transform wallCheck;
@@ -47,9 +55,15 @@ public class Player : MonoBehaviour
     Rigidbody2D movingObject;
 
     GameObject previousReversingObject;
-    bool waitForPlayer = false;
-    bool waitForGameObject = false;
-    bool isReversing = false;
+    GameObject icedObject;
+
+    bool onIce = false;
+bool iceJumping = false;
+    public PhysicsMaterial2D[] material;
+
+    TimeBody tb;
+    IceBody ib;
+
 
 
 
@@ -66,16 +80,33 @@ public class Player : MonoBehaviour
     public void Movement(float move, bool jump, bool jumpCancel)
     {
         horizontal = move;
+        
 
-        if (jump && IsGrounded())
+        if (IsObjected())
+            rb.sharedMaterial = material[0];
+        else
+            rb.sharedMaterial = material[1];
+
+        if (jump && (IsGrounded() || IsObjected()) && onIce == false)
         {
             float jumpForce = Mathf.Sqrt(jumpingPower * -2 * (Physics2D.gravity.y * rb.gravityScale));
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            iceJumping = false;
+        }
+        else if(jump && (IsGrounded() || IsObjected()) && onIce == true){
+            float jumpForce = Mathf.Sqrt(iceJumpingPower * -2 * (Physics2D.gravity.y * rb.gravityScale));
+            rb.AddForce(new Vector2(1, jumpForce), ForceMode2D.Impulse);
+            iceJumping = true;
         }
 
-        if (jumpCancel && rb.velocity.y > 0f)
+
+        if (jumpCancel && rb.velocity.y > 0f && iceJumping == false)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+        if (jumpCancel && rb.velocity.y > 0f && iceJumping == true)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.005f);
         }
 
         WallSlide();
@@ -85,14 +116,29 @@ public class Player : MonoBehaviour
         {
             Flip();
         }
+
+
     }
 
     void FixedUpdate()
     {
-        if (!isWallJumping)
+        if (!isWallJumping && onIce == false)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
+        else if(!isWallJumping && onIce == true){
+            rb.AddForce(new Vector2(horizontal * speed, rb.velocity.y), ForceMode2D.Force);
+        }
+
+
+
+        if (AbilityMenu.GameIsChoose)
+        {
+
+            virtualMouse.SetActive(false);
+
+        }
+
     }
 
     bool IsGrounded()
@@ -103,6 +149,12 @@ public class Player : MonoBehaviour
     bool IsWalled()
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
+    }
+    bool IsObjected()
+    {
+
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, objectLayer) && (movingObject != null || reversingObject != null);
+
     }
 
 
@@ -198,7 +250,7 @@ public class Player : MonoBehaviour
         Vector2 direction = Vector2.zero;
 
 
-        if (!usingVirtualMouse)
+        if (!usingVirtualMouse && !AbilityMenu.GameIsChoose)
         {
 
             virtualMouse.transform.position = screenPosition;
@@ -206,7 +258,7 @@ public class Player : MonoBehaviour
             distance = Vector2.Distance(screenPosition, transform.position);
         }
 
-        if (usingVirtualMouse)
+        if (usingVirtualMouse && !AbilityMenu.GameIsChoose)
         {
             direction = ((Vector2)virtualMouse.transform.position - (Vector2)transform.position).normalized;
             virtualMouse.transform.position += new Vector3(horizontal * cursorSensitivity, vertical * cursorSensitivity, 0);
@@ -305,7 +357,14 @@ public class Player : MonoBehaviour
                 if (hit.distance < kinesisRange)
                 {
                     Vector2 targetPosition = (Vector2)virtualMouse.transform.position;
+
+                    movingObject.transform.rotation = Quaternion.identity;
                     movingObject.MovePosition(targetPosition);
+
+                    if ((movingObject.transform.rotation == Quaternion.identity))
+                        movingObject.freezeRotation = true;
+
+
 
                 }
                 else
@@ -324,8 +383,10 @@ public class Player : MonoBehaviour
             if (movingObject != null)
             {
                 movingObject.velocity = Vector2.zero;
+                movingObject.freezeRotation = false;
                 movingObject = null;
             }
+
 
             virtualMouse.transform.position = transform.position;
             virtualMouse.SetActive(false);
@@ -336,7 +397,7 @@ public class Player : MonoBehaviour
     public void Reverse(Vector3 mousePosition, bool hold, float horizontal, float vertical)
     {
 
-         RaycastHit2D hit = Raycast(mousePosition, horizontal, vertical);
+        RaycastHit2D hit = Raycast(mousePosition, horizontal, vertical);
 
 
         if (hold)
@@ -347,6 +408,7 @@ public class Player : MonoBehaviour
                 {
                     Debug.Log("Moveable");
                     reversingObject = hit.collider.gameObject;
+                    tb = reversingObject.GetComponent<TimeBody>();
 
                 }
 
@@ -357,10 +419,11 @@ public class Player : MonoBehaviour
 
                 if (hit.distance < kinesisRange)
                 {
-                    Debug.Log("reversing");
+                    if (tb != null)
+                        tb.StartReverse();
 
                 }
-             
+
             }
         }
 
@@ -369,8 +432,9 @@ public class Player : MonoBehaviour
 
             if (reversingObject != null)
             {
-                //reversingObject.reverse();
-                Debug.Log("Stop Reversing");
+
+                if (tb != null)
+                    tb.StopReverse();
                 reversingObject = null;
             }
 
@@ -381,5 +445,53 @@ public class Player : MonoBehaviour
 
 
     }
+    public void Cryosis(bool hold)
+    {
+
+        
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -0.5f), Vector2.down, 1);
+        if(hit.collider != null){
+
+            icedObject = hit.collider.gameObject;
+            ib = icedObject.GetComponent<IceBody>();
+            if(ib != null)
+            onIce = ib.isIced;
+
+        }
+        else{
+
+            if(!iceJumping)
+            onIce = false;
+        }
+
+
+
+        if (hold)
+        {
+            speed = cryosisSpeed;
+            if(ib != null)
+            ib.IceObject();
+            
+            
+        }
+        if (!hold)
+        {
+            
+            speed = normalSpeed;
+            
+
+        }
+        if(AbilityMenu.GameIsChoose || PauseMenu.GameIsPaused){
+
+            speed = normalSpeed;
+
+        }
+        
+    }
+
 }
+
+
+
 

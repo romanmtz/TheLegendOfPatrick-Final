@@ -38,7 +38,6 @@ public class AbilityMenu : MonoBehaviour
             {
                 abilityMenuUI.SetActive(true);
                 Time.timeScale = 0.1f;
-                Time.fixedDeltaTime = Time.timeScale * .02f;
                 GameIsChoose = true;
 
                 menuInputSwitcher.SwitchToAbilityEventSystem();
@@ -51,7 +50,6 @@ public class AbilityMenu : MonoBehaviour
 
             abilityMenuUI.SetActive(false);
             Time.timeScale = 1;
-            Time.fixedDeltaTime = .02f;
             GameIsChoose = false;
 
         }

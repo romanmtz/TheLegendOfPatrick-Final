@@ -8,9 +8,6 @@ public class PlayerInputController : MonoBehaviour
     public PauseMenu menu;
     public AbilityMenu amenu;
 
-
-
-
     void Awake()
     {
 
@@ -52,6 +49,11 @@ public class PlayerInputController : MonoBehaviour
         if(AbilityMenu.AbilityMode == "reverse"){
 
             roman.Reverse(Input.mousePosition, Input.GetButton("Fire"),Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
+        }
+        if(AbilityMenu.AbilityMode == "cryosis"){
+
+            roman.Cryosis(Input.GetButton("Fire"));
 
         }
 
