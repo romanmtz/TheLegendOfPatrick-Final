@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public float wallJumpingTime = 0.2f;
     float wallJumpingCounter;
     public float wallJumpingDuration = 0.2f;
-    Vector2 wallJumpingPower = new Vector2(10f, 20f);
+    Vector2 wallJumpingPower = new Vector2(10f, 23f);
 
     // Layer masks
     public LayerMask groundLayer;
