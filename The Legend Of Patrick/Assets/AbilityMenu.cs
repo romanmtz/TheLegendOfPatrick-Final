@@ -17,6 +17,7 @@ public class AbilityMenu : MonoBehaviour
     public MenuInputSwitcher menuInputSwitcher;
     public TextMeshProUGUI abilitytext;
     public static bool GameIsChoose = false;
+    public static bool MenuBlock = false;
     public static string AbilityMode;
 
     Rigidbody2D rb;
@@ -32,26 +33,29 @@ public class AbilityMenu : MonoBehaviour
     public void Choose(bool choose)
     {
 
-        if (choose)
+        if (!MenuBlock)
         {
-            if (Time.timeScale != 0.1f)
+            if (choose)
             {
-                abilityMenuUI.SetActive(true);
-                Time.timeScale = 0.1f;
-                GameIsChoose = true;
+                if (Time.timeScale != 0.1f)
+                {
+                    abilityMenuUI.SetActive(true);
+                    Time.timeScale = 0.1f;
+                    GameIsChoose = true;
 
-                menuInputSwitcher.SwitchToAbilityEventSystem();
+                    menuInputSwitcher.SwitchToAbilityEventSystem();
+
+                }
 
             }
+            else
+            {
 
-        }
-        else
-        {
+                abilityMenuUI.SetActive(false);
+                Time.timeScale = 1;
+                GameIsChoose = false;
 
-            abilityMenuUI.SetActive(false);
-            Time.timeScale = 1;
-            GameIsChoose = false;
-
+            }
         }
 
 

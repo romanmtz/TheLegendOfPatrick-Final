@@ -2163,7 +2163,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 35.45
+  orthographic size: 17.62
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2435,7 +2435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isIced: 0
-  freezeTime: 0
+  freezeTime: 20
   timer: 0
 --- !u!1001 &1270873317
 PrefabInstance:
@@ -2623,6 +2623,30 @@ MonoBehaviour:
   isIced: 0
   freezeTime: 1
   timer: 0
+--- !u!1 &1449094285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1483036690299244388, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
+  m_PrefabInstance: {fileID: 379668464195564749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1449094293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449094285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4001369fb9518634295ca3fb2e382e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ascendRange: 5
+  kinesisRange: 20
+  virtualMouse: {fileID: 472016359}
+  cursorSensitivity: 0.2
+  reverseRange: 20
+  cryosisSpeed: 18.2
+  material: []
 --- !u!1 &1476527323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4642,6 +4666,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 472016359}
     - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
+      propertyPath: iceJumpingPower
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
       propertyPath: cursorSensitivity
       value: 0.05
       objectReference: {fileID: 0}
@@ -4736,5 +4764,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1483036690299244388, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1449094293}
   m_SourcePrefab: {fileID: 100100000, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}

@@ -5,16 +5,14 @@ public class PlayerInputController : MonoBehaviour
 {
 
     Player roman;
+    Abilities abilities;
     public PauseMenu menu;
     public AbilityMenu amenu;
 
     void Awake()
     {
-
         roman = GetComponent<Player>();
-
-
-
+        abilities = GetComponent<Abilities>();
     }
 
 
@@ -35,25 +33,25 @@ public class PlayerInputController : MonoBehaviour
         if (AbilityMenu.AbilityMode == "ascend")
         {
 
-            roman.Ascend(Input.GetButtonUp("Fire"));
+            abilities.Ascend(Input.GetButtonUp("Fire"));
 
         }
 
         if (AbilityMenu.AbilityMode == "kinesis")
         {
             // Cursor.visible = false;
-            roman.Kinesis(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            abilities.Kinesis(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         }
 
         if(AbilityMenu.AbilityMode == "reverse"){
 
-            roman.Reverse(Input.mousePosition, Input.GetButton("Fire"),Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            abilities.Reverse(Input.mousePosition, Input.GetButton("Fire"),Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         }
         if(AbilityMenu.AbilityMode == "cryosis"){
 
-            roman.Cryosis(Input.GetButton("Fire"));
+            abilities.Cryosis(Input.GetButton("Fire"));
 
         }
 
