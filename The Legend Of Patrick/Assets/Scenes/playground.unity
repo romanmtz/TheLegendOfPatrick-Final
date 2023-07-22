@@ -2163,7 +2163,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 17.62
+  orthographic size: 31.22
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2417,26 +2417,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215449703}
   m_CullTransparentMesh: 1
---- !u!1 &1264379677 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7713814237857395958, guid: cc3c6099809d71b41a93ec64cefce069, type: 3}
-  m_PrefabInstance: {fileID: 1994561724}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1264379682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264379677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c2e8062bd1f984983f6f2a69754595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isIced: 0
-  freezeTime: 20
-  timer: 0
 --- !u!1001 &1270873317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2623,30 +2603,6 @@ MonoBehaviour:
   isIced: 0
   freezeTime: 1
   timer: 0
---- !u!1 &1449094285 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1483036690299244388, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-  m_PrefabInstance: {fileID: 379668464195564749}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1449094293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1449094285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4001369fb9518634295ca3fb2e382e17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ascendRange: 5
-  kinesisRange: 20
-  virtualMouse: {fileID: 472016359}
-  cursorSensitivity: 0.2
-  reverseRange: 20
-  cryosisSpeed: 18.2
-  material: []
 --- !u!1 &1476527323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4564,10 +4520,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7713814237857395958, guid: cc3c6099809d71b41a93ec64cefce069, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1264379682}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc3c6099809d71b41a93ec64cefce069, type: 3}
 --- !u!1001 &2058589439
 PrefabInstance:
@@ -4653,61 +4606,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: cryosisSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: kinesisRange
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: virtualMouse
-      value: 
-      objectReference: {fileID: 472016359}
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: iceJumpingPower
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: cursorSensitivity
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: objectLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: material.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: material.Array.data[0]
-      value: 
-      objectReference: {fileID: 6200000, guid: 2c03eada18f04de4da9dde5ead0c255f, type: 2}
-    - target: {fileID: 1105960087020724118, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: material.Array.data[1]
-      value: 
-      objectReference: {fileID: 6200000, guid: f37abd553d413e141be244a2f1a7b70e, type: 2}
     - target: {fileID: 1483036690299244388, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1483036690299244388, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
+    - target: {fileID: 2399987772131996481, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
+      propertyPath: virtualMouse
+      value: 
+      objectReference: {fileID: 472016359}
     - target: {fileID: 4998766544751470714, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4998766544751470714, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.91
       objectReference: {fileID: 0}
     - target: {fileID: 4998766544751470714, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 3.25
       objectReference: {fileID: 0}
     - target: {fileID: 4998766544751470714, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4741,14 +4658,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5752733563231197734, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 5752733563231197734, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.436
-      objectReference: {fileID: 0}
     - target: {fileID: 7240021105077454241, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
       propertyPath: menu
       value: 
@@ -4757,15 +4666,8 @@ PrefabInstance:
       propertyPath: amenu
       value: 
       objectReference: {fileID: 570697063}
-    - target: {fileID: 7240021105077454241, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      propertyPath: virtualMouse
-      value: 
-      objectReference: {fileID: 472016359}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1483036690299244388, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1449094293}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b6e5f67cc91869479b0fda33028d7bb, type: 3}

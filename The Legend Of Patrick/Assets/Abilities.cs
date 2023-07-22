@@ -19,7 +19,7 @@ public class Abilities : MonoBehaviour
     bool usingVirtualMouse = false;
     bool hasMovingObject = false;
     Vector2 previousScreenPosition;
-    public float cursorSensitivity = 0.2f;
+    public float cursorSensitivity = 0.002f;
     Rigidbody2D movingObject;
 
     // Reverse variables
@@ -36,10 +36,9 @@ public class Abilities : MonoBehaviour
     public float cryosisSpeed = 18f;
     public static bool onIce = false;
     bool normalCancel = false;
-    public PhysicsMaterial2D[] material;
     bool hasIceBody = false;
-    bool isSkating = false;
-    bool isSkateJumping = false;
+    public static bool isSkating = false;
+    public static bool isSkateJumping = false;
 
     private void Awake()
     {
@@ -133,6 +132,7 @@ public class Abilities : MonoBehaviour
 
         if (hold)
         {
+
             AbilityMenu.MenuBlock = true;
             virtualMouse.SetActive(true);
 
@@ -153,6 +153,8 @@ public class Abilities : MonoBehaviour
         }
         else
         {
+
+            AbilityMenu.MenuBlock = false;
             if (hasMovingObject)
             {
                 movingObject.velocity = Vector2.zero;
@@ -160,6 +162,7 @@ public class Abilities : MonoBehaviour
             }
 
             hasMovingObject = false;
+            isRaycasting = false;
 
         }
     }
@@ -229,34 +232,49 @@ public class Abilities : MonoBehaviour
         }
 
 
-         bool isGrounded = roman.IsGrounded();
-    bool isWalled = roman.IsWalled();
-    bool isObjected = roman.IsObjected();
-    float originalSpeed = roman.ChangeSpeed(0);
+        bool isGrounded = roman.IsGrounded();
+        bool isWalled = roman.IsWalled();
+        bool isObjected = roman.IsObjected();
+        float originalSpeed = roman.ChangeSpeed(0);
 
-    if (hold)
-    {
-        AbilityMenu.MenuBlock = true;
-
-        if (hasIceBody)
+        if (hold)
         {
-            ib = icedObject.GetComponent<IceBody>();
-            ib.IceObject();
+            AbilityMenu.MenuBlock = true;
 
-            if (isGrounded)
+            if (hasIceBody)
             {
-                roman.ChangeSpeed(cryosisSpeed);
-                isSkating = true;
-                isSkateJumping = false;
+                ib = icedObject.GetComponent<IceBody>();
+                ib.IceObject();
+
+                if (isGrounded)
+                {
+                    roman.ChangeSpeed(cryosisSpeed);
+                    isSkating = true;
+                    isSkateJumping = false;
+                }
+                else if (!isSkateJumping && !isWalled && !isObjected)
+                {
+                    roman.ChangeSpeed(originalSpeed);
+                    isSkateJumping = true;
+                    isSkating = false;
+                }
             }
-            else if (!isSkateJumping && !isWalled && !isObjected)
+            else
             {
-                roman.ChangeSpeed(originalSpeed);
-                isSkateJumping = true;
+                if (!isSkateJumping)
+                    roman.ChangeSpeed(originalSpeed);
+
+                if (isGrounded)
+                {
+                    isSkating = false;
+                    isSkateJumping = false;
+                }
             }
         }
         else
         {
+            AbilityMenu.MenuBlock = false;
+
             if (!isSkateJumping)
                 roman.ChangeSpeed(originalSpeed);
 
@@ -266,27 +284,13 @@ public class Abilities : MonoBehaviour
                 isSkateJumping = false;
             }
         }
-    }
-    else
-    {
-        AbilityMenu.MenuBlock = false;
 
-        if (!isSkateJumping)
-            roman.ChangeSpeed(originalSpeed);
-
-        if (isGrounded)
+        // If the character is walled or objected, reset skating states and speed.
+        if (isWalled || isObjected)
         {
             isSkating = false;
             isSkateJumping = false;
+            roman.ChangeSpeed(originalSpeed);
         }
     }
-
-    // If the character is walled or objected, reset skating states and speed.
-    if (isWalled || isObjected)
-    {
-        isSkating = false;
-        isSkateJumping = false;
-        roman.ChangeSpeed(originalSpeed);
-    }
-}
 }

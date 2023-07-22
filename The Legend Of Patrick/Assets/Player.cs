@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float speed = 9f;
     float originalSpeed;
     bool isFacingRight = true;
+    public PhysicsMaterial2D[] material;
 
 
 
@@ -54,6 +55,9 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
+        ChangeMaterial();
+
+
 
     }
 
@@ -61,14 +65,14 @@ public class Player : MonoBehaviour
     {
         if (!isWallJumping)
         {
-            if (IsOnIce() == false)
+            if (IsOnIce() == true || Abilities.isSkateJumping == true)
             {
-                rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+                rb.AddForce(new Vector2(horizontal * speed, rb.velocity.y), ForceMode2D.Force);
             }
             else
             {
+                rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
-                rb.AddForce(new Vector2(horizontal * speed, rb.velocity.y), ForceMode2D.Force);
             }
         }
 
@@ -81,22 +85,15 @@ public class Player : MonoBehaviour
     {
         horizontal = move;
 
-        // if (IsObjected())
-        // {
-        //     rb.sharedMaterial = material[0];
-        // }
-        // else
-        // {
-        //     rb.sharedMaterial = material[1];
-        // }
+
 
         if (jump && (IsGrounded() || IsObjected()))
         {
 
-            if (IsOnIce() == true)
+            if (IsOnIce() == true || Abilities.isSkating)
             {
-                float jumpForce = Mathf.Sqrt(iceJumpingPower * -2 * (Physics2D.gravity.y * rb.gravityScale));
-                rb.AddForce(new Vector2(1, jumpForce), ForceMode2D.Impulse);
+                float jumpForce = (Mathf.Abs(rb.velocity.x) / 2) + Mathf.Sqrt(jumpingPower * -2 * (Physics2D.gravity.y * rb.gravityScale));
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             }
 
             else
@@ -110,7 +107,7 @@ public class Player : MonoBehaviour
 
         if (jumpCancel && rb.velocity.y > 0f)
         {
-            if (IsOnIce() == false)
+            if (!Abilities.isSkateJumping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
                 Debug.Log("Normal jumping cancel");
@@ -256,6 +253,20 @@ public class Player : MonoBehaviour
 
         speed = newSpeed;
         return originalSpeed;
+
+    }
+
+    void ChangeMaterial(){
+
+        if (IsObjected() && (AbilityMenu.AbilityMode == "kinesis" || AbilityMenu.AbilityMode == "reverse"))
+        {
+            rb.sharedMaterial = material[0];
+        }
+        else
+        {
+            rb.sharedMaterial = material[1];
+        } 
+
 
     }
 
