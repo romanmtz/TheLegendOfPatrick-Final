@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
+    public static Vector2 LastCheckpoint;
+
     // Movement variables
     float horizontal;
     public float speed = 9f;
