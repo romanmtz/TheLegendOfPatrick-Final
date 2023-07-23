@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon Level.unity
     guid: f4b06ea88059535499fe7f54f4d6e6e1
+  - enabled: 1
+    path: Assets/Scenes/Kinesis Level.unity
+    guid: 0f95c9e7ac72ee24b82266ee3a24417b
   m_configObjects: {}

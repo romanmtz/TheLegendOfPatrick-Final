@@ -261,14 +261,14 @@ public class Player : MonoBehaviour
 
     void ChangeMaterial(){
 
-        if (IsObjected() && (AbilityMenu.AbilityMode == "kinesis" || AbilityMenu.AbilityMode == "reverse"))
-        {
-            rb.sharedMaterial = material[0];
-        }
-        else
-        {
-            rb.sharedMaterial = material[1];
-        } 
+        // if (IsObjected() && (AbilityMenu.AbilityMode == "kinesis" || AbilityMenu.AbilityMode == "reverse"))
+        // {
+        //     rb.sharedMaterial = material[0];
+        // }
+        // else
+        // {
+        //     rb.sharedMaterial = material[1];
+        // } 
 
 
     }
