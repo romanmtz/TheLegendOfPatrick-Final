@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
 
     public bool IsObjected()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, objectLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.01f, objectLayer);
     }
 
     public bool IsOnIce()
@@ -261,14 +261,14 @@ public class Player : MonoBehaviour
 
     void ChangeMaterial(){
 
-        // if (IsObjected() && (AbilityMenu.AbilityMode == "kinesis" || AbilityMenu.AbilityMode == "reverse"))
-        // {
-        //     rb.sharedMaterial = material[0];
-        // }
-        // else
-        // {
-        //     rb.sharedMaterial = material[1];
-        // } 
+        if (IsObjected() && AbilityMenu.AbilityMode == "reverse")
+        {
+            rb.sharedMaterial = material[0];
+        }
+        else
+        {
+            rb.sharedMaterial = material[1];
+        } 
 
 
     }

@@ -16,5 +16,6 @@ public class DeathPlane : MonoBehaviour
         if(other.CompareTag("Player"))
         rb.transform.position = Player.LastCheckpoint;
 
+
     }
 }

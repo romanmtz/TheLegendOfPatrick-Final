@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2319919809903169581}
   - component: {fileID: 6138217377063623916}
   - component: {fileID: 4799678299823571140}
+  - component: {fileID: 7052165615916981429}
   m_Layer: 7
   m_Name: Object
   m_TagString: Moveable
@@ -223,3 +224,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isReversing: 0
+--- !u!114 &7052165615916981429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8924515317306908606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf97aef0d8a7444aa39aa450cf72514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

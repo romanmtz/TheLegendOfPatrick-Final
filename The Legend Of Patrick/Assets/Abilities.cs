@@ -195,6 +195,8 @@ public class Abilities : MonoBehaviour
             if (hasTimeBody && !isReversing)
             {
                 tb = reversingObject.GetComponent<TimeBody>();
+
+                
                 tb.StartReverse();
                 isReversing = true;
             }

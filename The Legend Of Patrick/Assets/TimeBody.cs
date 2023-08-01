@@ -5,9 +5,14 @@ using UnityEngine;
 public class TimeBody : MonoBehaviour
 {
 
+    public bool isStill = false;
     public bool isReversing = false;
+    float originalGScale;
+    public float stillTime = 1f;
+    public float timer = 0;
 
-    List<PointInTime> points;
+    
+    public List<PointInTime> points;
     Rigidbody2D rb;
 
 
@@ -15,6 +20,7 @@ public class TimeBody : MonoBehaviour
     {
         points = new List<PointInTime>();
         rb = GetComponent<Rigidbody2D>();
+        originalGScale = rb.gravityScale;
     }
     public void StartReverse()
     {
@@ -22,37 +28,61 @@ public class TimeBody : MonoBehaviour
 
         isReversing = true;
         rb.isKinematic = true;
+        timer = stillTime;
         Debug.Log("reversing");
 
 
     }
     public void StopReverse()
-    {
+    {                           
 
 
         isReversing = false;
+        timer = 0;
+        rb.constraints = RigidbodyConstraints2D.None;
         rb.isKinematic = false;
         Debug.Log("Stop Reversing");
 
 
     }
 
+  
     public void Reverse()
     {
 
-        if (points.Count > 0)
-        {
 
-            PointInTime point = points[0];
-            rb.MovePosition(point.position);
-            rb.MoveRotation(point.rotation);
-            points.RemoveAt(0);
+        if (timer > 0)
+        {
+            timer -= Time.fixedDeltaTime;
+
+            isStill = true;
+             
+             rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         }
-        else
-        {
+        else{
+            
+            isStill = false;
+            rb.constraints = RigidbodyConstraints2D.None;
 
-            StopReverse();
 
+        }
+
+
+        if(!isStill){
+            
+            if (points.Count > 0)
+            {
+                PointInTime point = points[0];
+                rb.MovePosition(point.position);
+                rb.MoveRotation(point.rotation);
+                points.RemoveAt(0);
+            }
+            else
+            {
+
+                StopReverse();
+
+            }
         }
 
     }
