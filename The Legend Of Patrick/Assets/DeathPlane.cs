@@ -13,8 +13,10 @@ public class DeathPlane : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         
-        if(other.CompareTag("Player"))
-        rb.transform.position = Player.LastCheckpoint;
+        if(other.CompareTag("Player")){
+            rb.transform.position = Player.LastCheckpoint;
+            other.attachedRigidbody.velocity = Vector2.zero;
+        }
 
 
     }
