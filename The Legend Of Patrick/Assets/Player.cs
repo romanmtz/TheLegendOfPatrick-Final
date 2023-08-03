@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     // Jumping variables
     public float jumpingPower = 3f;
     public float iceJumpingPower = 6f;
-    bool iceJumping = false;
 
     // Wall sliding variables
     bool isWallSliding;

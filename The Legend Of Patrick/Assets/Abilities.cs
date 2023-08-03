@@ -16,7 +16,6 @@ public class Abilities : MonoBehaviour
     // Kinesis variables
     public float kinesisRange = 20f;
     public GameObject virtualMouse;
-    bool usingVirtualMouse = false;
     bool hasMovingObject = false;
     Vector2 previousScreenPosition;
     public float cursorSensitivity = 0.002f;
@@ -35,7 +34,6 @@ public class Abilities : MonoBehaviour
     IceBody ib;
     public float cryosisSpeed = 18f;
     public static bool onIce = false;
-    bool normalCancel = false;
     bool hasIceBody = false;
     public static bool isSkating = false;
     public static bool isSkateJumping = false;
