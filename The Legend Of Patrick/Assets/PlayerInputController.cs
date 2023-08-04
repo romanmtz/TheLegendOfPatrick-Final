@@ -24,6 +24,7 @@ public class PlayerInputController : MonoBehaviour
         {
             menu.Pause();
         }
+        
 
         if (!PauseMenu.GameIsPaused)
         {

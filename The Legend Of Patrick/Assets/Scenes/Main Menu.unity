@@ -622,7 +622,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 10.7, y: 95.4}
-  m_SizeDelta: {x: 177, y: 30}
+  m_SizeDelta: {x: 207, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244855927
 MonoBehaviour:
@@ -1355,6 +1355,8 @@ GameObject:
   - component: {fileID: 570697060}
   - component: {fileID: 570697059}
   - component: {fileID: 570697058}
+  - component: {fileID: 570697062}
+  - component: {fileID: 570697063}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1447,6 +1449,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &570697062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570697057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c81e6ea5b937a24eafe44aec241dd23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 611167728}
+  mainMenu: {fileID: 827731829}
+  settingsMenu: {fileID: 452997366}
+  settingsFirstSelectedGameObject: {fileID: 244855925}
+--- !u!114 &570697063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570697057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2946b496db4a3404d83657a8c1d133fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 244855927}
+  EventSystem: {fileID: 611167728}
 --- !u!1 &579842730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,8 +1563,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 611167730}
-        m_TargetAssemblyTypeName: MainMenuES, Assembly-CSharp
+      - m_Target: {fileID: 570697062}
+        m_TargetAssemblyTypeName: MenuSwitcher, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -1668,7 +1700,6 @@ GameObject:
   - component: {fileID: 611167729}
   - component: {fileID: 611167728}
   - component: {fileID: 611167727}
-  - component: {fileID: 611167730}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1726,21 +1757,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &611167730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611167726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c81e6ea5b937a24eafe44aec241dd23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenu: {fileID: 827731829}
-  settingsMenu: {fileID: 452997366}
-  settingsFirstSelectedGameObject: {fileID: 244855925}
 --- !u!1 &650629210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,8 +1917,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 611167730}
-        m_TargetAssemblyTypeName: MainMenuES, Assembly-CSharp
+      - m_Target: {fileID: 570697062}
+        m_TargetAssemblyTypeName: MenuSwitcher, Assembly-CSharp
         m_MethodName: SettingsMenu
         m_Mode: 1
         m_Arguments:
@@ -2303,8 +2319,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 611167730}
-        m_TargetAssemblyTypeName: MainMenuES, Assembly-CSharp
+      - m_Target: {fileID: 570697062}
+        m_TargetAssemblyTypeName: MenuSwitcher, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -4954,8 +4970,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 611167730}
-        m_TargetAssemblyTypeName: MainMenuES, Assembly-CSharp
+      - m_Target: {fileID: 570697062}
+        m_TargetAssemblyTypeName: MenuSwitcher, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:

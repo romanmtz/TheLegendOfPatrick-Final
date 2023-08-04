@@ -4,37 +4,50 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class MainMenuES : MonoBehaviour
+public class MenuSwitcher : MonoBehaviour
 {
-    EventSystem eventSystem;
+    public EventSystem eventSystem;
     public GameObject mainMenu;
     public GameObject settingsMenu;
     public GameObject settingsFirstSelectedGameObject;
     bool isMainMenu = true;
-    bool isBlocked = false;
+    bool isSettingsMenu = false;
+    Scene m_Scene;
+    string sceneName;
 
     private void Awake()
     {
 
-        eventSystem = GetComponent<EventSystem>();
+        
+        m_Scene = SceneManager.GetActiveScene();
+        string sceneName = m_Scene.name;
+        Cursor.visible = false;
+       
 
 
     }
     void Update()
     {
 
+        
 
-        if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Pause"))
+        if ((Input.GetButtonDown("Cancel") || Input.GetButtonDown("Pause")) && sceneName == "Main Menu")
         {
 
             if (GameObject.Find("Blocker") == null)
             {
                 if (isMainMenu)
                     SettingsMenu();
-                else
+                else 
                     MainMenu();
             }
 
+
+        }
+        else if(Input.GetButtonDown("Cancel") || Input.GetButtonDown("Pause")){
+            
+            if(isSettingsMenu)
+            MainMenu();
 
         }
 
@@ -48,6 +61,7 @@ public class MainMenuES : MonoBehaviour
         settingsMenu.SetActive(true);
         eventSystem.SetSelectedGameObject(settingsFirstSelectedGameObject);
         isMainMenu = false;
+        isSettingsMenu = true;
 
     }
     public void MainMenu()
@@ -57,8 +71,11 @@ public class MainMenuES : MonoBehaviour
         settingsMenu.SetActive(false);
         eventSystem.SetSelectedGameObject(eventSystem.firstSelectedGameObject);
         isMainMenu = true;
+        isSettingsMenu = false;
+        
 
     }
+
 
     public void StartGame()
     {

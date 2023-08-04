@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseFirstButton;
     public MenuInputSwitcher menuInputSwitcher;
     public static bool GameIsPaused = false;
+    public GameObject settingsMenu;
 
     void Awake()
     {
 
         pauseMenuUI.SetActive(false);
+        if (GameIsPaused)
+            Pause();
 
     }
     public void Pause()
@@ -35,21 +39,25 @@ public class PauseMenu : MonoBehaviour
         {
             pauseMenuUI.SetActive(false);
             Time.timeScale = 1;
+            settingsMenu.SetActive(false);
             GameIsPaused = false;
         }
 
     }
 
-   
+
     public void MainMenu()
     {
 
-        Debug.Log("Switching to Main Menu Scene!");
+
+        SceneManager.LoadScene("Main Menu");
 
     }
 
-    private void Update() {
-        if(!GameIsPaused){
+    private void Update()
+    {
+        if (!GameIsPaused)
+        {
 
             menuInputSwitcher.TurnOffEventSystems(false);
 
