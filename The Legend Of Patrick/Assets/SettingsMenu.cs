@@ -22,22 +22,13 @@ public class SettingsMenu : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            // if (resolutions[i].refreshRate == currentRefresh)
-            // {
-            // if ((resolutions[i].height % 16 == 0 && resolutions[i].width % 9 == 0))
-            // {
+          
             string option = resolutions[i].width + " x " + resolutions[i].height + "@" + resolutions[i].refreshRate + "hz";
             options.Add(option);
 
             if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
                 currentResolutionIndex = i;
-            // }
-
-
-
-
-            // }
-
+      
         }
 
         resolutionDropdown.AddOptions(options);

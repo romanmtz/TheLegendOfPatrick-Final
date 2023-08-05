@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 56c3a044bf173614595f29f62a5d3ab9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -207,12 +207,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1caf0c00310ee744d885841fda92a99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSFX: {fileID: 8300000, guid: 7b352f9677080fa4186b94928332e22b, type: 3}
+  skatingSFX: {fileID: 8300000, guid: 8c3ef66eb9aa7694c8ce92161c39f954, type: 3}
   speed: 9
   material:
   - {fileID: 6200000, guid: 2c03eada18f04de4da9dde5ead0c255f, type: 2}
   - {fileID: 6200000, guid: f37abd553d413e141be244a2f1a7b70e, type: 2}
-  jumpingPower: 3
+  jumpingPower: 4
   iceJumpingPower: 5
+  wallslideSFX: {fileID: 8300000, guid: 500f149af80e0ff41abc2395e7e85f92, type: 3}
   wallSlidingSpeed: 2
   wallJumpingTime: 0.2
   wallJumpingDuration: 0.2
@@ -265,6 +268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4001369fb9518634295ca3fb2e382e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ascendSFX: {fileID: 8300000, guid: 43161680c05d85d40863f23f156776e3, type: 3}
+  kinesisSFX: {fileID: 8300000, guid: 2eaa8c29664358842a864c47f2eaa41f, type: 3}
+  reverseSFX: {fileID: 8300000, guid: 796eb12052de6b44fb7db13b59adb011, type: 3}
   ascendRange: 5
   kinesisRange: 20
   virtualMouse: {fileID: 0}

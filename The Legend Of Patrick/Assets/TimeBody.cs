@@ -5,13 +5,15 @@ using UnityEngine;
 public class TimeBody : MonoBehaviour
 {
 
+    
+    
     public bool isStill = false;
     public bool isReversing = false;
     float originalGScale;
     public float stillTime = 1f;
     public float timer = 0;
 
-    
+
     public List<PointInTime> points;
     Rigidbody2D rb;
 
@@ -34,7 +36,7 @@ public class TimeBody : MonoBehaviour
 
     }
     public void StopReverse()
-    {                           
+    {
 
 
         isReversing = false;
@@ -46,7 +48,7 @@ public class TimeBody : MonoBehaviour
 
     }
 
-  
+
     public void Reverse()
     {
 
@@ -56,11 +58,12 @@ public class TimeBody : MonoBehaviour
             timer -= Time.fixedDeltaTime;
 
             isStill = true;
-             
-             rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
+
+            rb.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         }
-        else{
-            
+        else
+        {
+
             isStill = false;
             rb.constraints = RigidbodyConstraints2D.None;
 
@@ -68,8 +71,9 @@ public class TimeBody : MonoBehaviour
         }
 
 
-        if(!isStill){
-            
+        if (!isStill)
+        {
+
             if (points.Count > 0)
             {
                 PointInTime point = points[0];
@@ -90,9 +94,9 @@ public class TimeBody : MonoBehaviour
     {
         if ((points.Count > Mathf.Round(10f / Time.fixedDeltaTime)))
             points.RemoveAt(points.Count - 1);
-       
-            points.Insert(0, new PointInTime(transform.position, transform.rotation));
-        
+
+        points.Insert(0, new PointInTime(transform.position, transform.rotation));
+
 
     }
 

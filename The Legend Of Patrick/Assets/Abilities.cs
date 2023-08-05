@@ -5,6 +5,11 @@ using UnityEngine;
 public class Abilities : MonoBehaviour
 {
     Player roman;
+
+    public AudioClip ascendSFX;
+    public AudioClip kinesisSFX;
+    public AudioClip reverseSFX;
+
     public float ascendRange = 5f;
 
     //Raycast variables
@@ -104,6 +109,7 @@ public class Abilities : MonoBehaviour
             if (ascend)
             {
                 Debug.Log("Ascending");
+                AudioHandler.singleton.PlaySound(ascendSFX);
                 Bounds colliderBounds = hit.collider.bounds;
                 float top = colliderBounds.max.y;
                 transform.position = new Vector2(transform.position.x, top);
@@ -131,6 +137,7 @@ public class Abilities : MonoBehaviour
         if (hold)
         {
 
+            AudioHandler.singleton.LoopSound(kinesisSFX);
             AbilityMenu.MenuBlock = true;
             virtualMouse.SetActive(true);
 
@@ -152,6 +159,7 @@ public class Abilities : MonoBehaviour
         else
         {
 
+            // AudioHandler.singleton.StopLoop(kinesisSFX);
             AbilityMenu.MenuBlock = false;
             if (hasMovingObject)
             {
@@ -188,16 +196,23 @@ public class Abilities : MonoBehaviour
 
         if (hold)
         {
+
+
+            AudioHandler.singleton.LoopSound(kinesisSFX);
+
+
             AbilityMenu.MenuBlock = true;
             virtualMouse.SetActive(true);
             if (hasTimeBody && !isReversing)
             {
+
                 tb = reversingObject.GetComponent<TimeBody>();
 
-                
                 tb.StartReverse();
+                AudioHandler.singleton.PlaySound(reverseSFX);
                 isReversing = true;
             }
+
         }
         else
         {

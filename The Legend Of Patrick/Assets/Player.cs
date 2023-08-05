@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
-    public static Vector2 LastCheckpoint;
 
+    public static Vector2 LastCheckpoint;
+    public AudioClip jumpSFX;
+    public AudioClip skatingSFX;
     // Movement variables
     float horizontal;
     public float speed = 9f;
@@ -17,10 +18,12 @@ public class Player : MonoBehaviour
 
 
     // Jumping variables
+
     public float jumpingPower = 3f;
     public float iceJumpingPower = 6f;
 
     // Wall sliding variables
+    public AudioClip wallslideSFX;
     bool isWallSliding;
     public float wallSlidingSpeed = 2f;
 
@@ -59,6 +62,14 @@ public class Player : MonoBehaviour
         MovePlayer();
         ChangeMaterial();
 
+        if ((rb.velocity.x != 0) && IsOnIce())
+        {
+            AudioHandler.singleton.LoopSound(skatingSFX);
+        }
+        else
+        {
+            AudioHandler.singleton.StopLoop(skatingSFX);
+        }
 
 
     }
@@ -69,10 +80,12 @@ public class Player : MonoBehaviour
         {
             if (IsOnIce() == true || Abilities.isSkateJumping == true)
             {
+
                 rb.AddForce(new Vector2(horizontal * speed, rb.velocity.y), ForceMode2D.Force);
             }
             else
             {
+
                 rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
             }
@@ -92,10 +105,17 @@ public class Player : MonoBehaviour
         if (jump && (IsGrounded() || IsObjected()))
         {
 
+            AudioHandler.singleton.PlaySound(jumpSFX);
+            AudioHandler.singleton.StopLoop(skatingSFX);
+
+
             if (IsOnIce() == true || Abilities.isSkating)
             {
+
                 float jumpForce = (Mathf.Abs(rb.velocity.x) / 2) + Mathf.Sqrt(jumpingPower * -2 * (Physics2D.gravity.y * rb.gravityScale));
                 rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+
+
             }
 
             else
@@ -183,11 +203,16 @@ public class Player : MonoBehaviour
     {
         if (IsWalled() && !IsGrounded() && horizontal != 0f)
         {
+
+
             isWallSliding = true;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            AudioHandler.singleton.LoopSound(wallslideSFX);
         }
         else
         {
+
+            AudioHandler.singleton.StopLoop(wallslideSFX);
             isWallSliding = false;
         }
     }
@@ -208,6 +233,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
         {
+
+            AudioHandler.singleton.PlaySound(jumpSFX);
+
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
@@ -258,7 +286,8 @@ public class Player : MonoBehaviour
 
     }
 
-    void ChangeMaterial(){
+    void ChangeMaterial()
+    {
 
         if (IsObjected() && AbilityMenu.AbilityMode == "reverse")
         {
@@ -267,7 +296,7 @@ public class Player : MonoBehaviour
         else
         {
             rb.sharedMaterial = material[1];
-        } 
+        }
 
 
     }
