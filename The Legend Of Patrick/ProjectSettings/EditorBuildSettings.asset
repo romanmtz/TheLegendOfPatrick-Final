@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/playground.unity
     guid: ba6368eb29a67a04485d46b59a8392f5
   - enabled: 1
-    path: Assets/Scenes/Cryosis Level.unity
-    guid: 02125d579d54dff4ea7609580f1b7459
-  - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 93106a51d81a9d446bad4c2fbe321655
   - enabled: 1
@@ -26,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Reverse Level.unity
     guid: 0bd26bb9920b656409e8bc8eaea99787
+  - enabled: 1
+    path: Assets/Scenes/Cryosis Level.unity
+    guid: 02125d579d54dff4ea7609580f1b7459
   m_configObjects: {}
