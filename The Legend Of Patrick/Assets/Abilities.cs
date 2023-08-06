@@ -16,7 +16,8 @@ public class Abilities : MonoBehaviour
     Vector2 direction;
     float distance;
     bool isRaycasting = false;
-
+    public LayerMask objectLayer;
+    bool hasFlipped = false;
 
     // Kinesis variables
     public float kinesisRange = 20f;
@@ -43,6 +44,8 @@ public class Abilities : MonoBehaviour
     public static bool isSkating = false;
     public static bool isSkateJumping = false;
 
+    bool changedDirection = false;
+
     private void Awake()
     {
         roman = GetComponent<Player>();
@@ -65,6 +68,7 @@ public class Abilities : MonoBehaviour
     RaycastHit2D Raycast(Vector3 mousePosition, float horizontal, float vertical)
     {
         RaycastHit2D hit;
+        RaycastHit2D playerHit;
 
 
         isRaycasting = true;
@@ -81,17 +85,16 @@ public class Abilities : MonoBehaviour
         if (roman.IsFacingRight())
         {
             Debug.DrawRay(transform.position + new Vector3(0.5f, 0f), direction * distance);
-            hit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance, objectLayer);
+            playerHit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance);
+
         }
         else
         {
             Debug.DrawRay(transform.position + new Vector3(-0.5f, 0f), direction * distance);
-            hit = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0f), direction, distance);
-        }
+            hit = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0f), direction, distance, objectLayer);
+            playerHit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance);
 
-        if (hit.collider != null && hit.collider.CompareTag("Player"))
-        {
-            roman.Flip();
         }
 
         return hit;
@@ -122,7 +125,7 @@ public class Abilities : MonoBehaviour
 
         RaycastHit2D hit = Raycast(mousePosition, horizontal, vertical);
 
-        if (hit.collider != null && hit.collider.CompareTag("Moveable"))
+        if (hit.collider != null && hit.collider.CompareTag("Moveable") && !hasMovingObject)
         {
             Debug.Log("Moveable");
             movingObject = hit.collider.attachedRigidbody;
@@ -131,6 +134,7 @@ public class Abilities : MonoBehaviour
         }
         else
         {
+            if(hit.collider == null)
             hasMovingObject = false;
         }
 
@@ -144,9 +148,14 @@ public class Abilities : MonoBehaviour
             if (hasMovingObject && distance < kinesisRange)
             {
 
+
                 Vector2 targetPosition = (Vector2)virtualMouse.transform.position;
                 movingObject.transform.rotation = Quaternion.identity;
-                movingObject.MovePosition(targetPosition);
+
+                if (!roman.IsObjected())
+                {
+                    movingObject.MovePosition(targetPosition);
+                }
 
 
                 //add a speed limiter later

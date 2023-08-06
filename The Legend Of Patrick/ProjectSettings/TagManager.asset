@@ -53,6 +53,9 @@ TagManager:
   - name: L4
     uniqueID: 3662203419
     locked: 0
+  - name: L5
+    uniqueID: 3185872203
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

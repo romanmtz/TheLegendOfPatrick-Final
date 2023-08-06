@@ -12,9 +12,8 @@ public class Player : MonoBehaviour
     float horizontal;
     public float speed = 9f;
     float originalSpeed;
-    bool isFacingRight = true;
+    public bool isFacingRight = true;
     public PhysicsMaterial2D[] material;
-
 
 
     // Jumping variables

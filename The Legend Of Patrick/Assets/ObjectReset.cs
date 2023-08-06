@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectReset : MonoBehaviour
 {
-    
+
     Vector2 initPosition;
     Quaternion initRotation;
     Rigidbody2D rb;
@@ -13,7 +13,7 @@ public class ObjectReset : MonoBehaviour
 
     void Start()
     {
-        
+
         initPosition = transform.position;
         initRotation = transform.rotation;
         rb = GetComponent<Rigidbody2D>();
@@ -21,17 +21,26 @@ public class ObjectReset : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag("DeathPlane")){
+    public void Reset()
+    {
 
-            rb.velocity = Vector2.zero;
-            rb.angularVelocity = 0;
-            transform.position = initPosition;
-            transform.rotation = initRotation;
-            tb.points = new List<PointInTime>();
 
-        }
+
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0;
+        transform.position = initPosition;
+        transform.rotation = initRotation;
+        tb.points = new List<PointInTime>();
+
+
     }
 
 
-}                                    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DeathPlane"))
+            Reset();
+    }
+
+
+}
