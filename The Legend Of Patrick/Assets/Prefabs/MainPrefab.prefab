@@ -686,6 +686,7 @@ MonoBehaviour:
   jumpSFX: {fileID: 8300000, guid: 7b352f9677080fa4186b94928332e22b, type: 3}
   skatingSFX: {fileID: 8300000, guid: 8c3ef66eb9aa7694c8ce92161c39f954, type: 3}
   speed: 9
+  isFacingRight: 1
   material:
   - {fileID: 6200000, guid: 2c03eada18f04de4da9dde5ead0c255f, type: 2}
   - {fileID: 6200000, guid: f37abd553d413e141be244a2f1a7b70e, type: 2}
@@ -748,6 +749,9 @@ MonoBehaviour:
   kinesisSFX: {fileID: 8300000, guid: 2eaa8c29664358842a864c47f2eaa41f, type: 3}
   reverseSFX: {fileID: 8300000, guid: 796eb12052de6b44fb7db13b59adb011, type: 3}
   ascendRange: 5
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 128
   kinesisRange: 20
   virtualMouse: {fileID: 5006912468365168640}
   cursorSensitivity: 0.05
