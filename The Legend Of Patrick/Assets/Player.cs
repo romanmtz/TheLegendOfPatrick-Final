@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     public LayerMask wallLayer;
     public LayerMask objectLayer;
 
+    public static bool isDialogue = false;
+
     // Checkpoints
     Transform groundCheck;
     Transform wallCheck;
@@ -58,6 +60,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(isDialogue)
+        horizontal = 0;
         MovePlayer();
         ChangeMaterial();
 

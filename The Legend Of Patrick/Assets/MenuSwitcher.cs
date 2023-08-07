@@ -10,6 +10,7 @@ public class MenuSwitcher : MonoBehaviour
     public GameObject mainMenu;
     public GameObject settingsMenu;
     public GameObject settingsFirstSelectedGameObject;
+    public LevelLoader levelLoader;
     bool isMainMenu = true;
     bool isSettingsMenu = false;
     Scene m_Scene;
@@ -79,7 +80,9 @@ public class MenuSwitcher : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Ascend Level");
+        
+        StartCoroutine(levelLoader.LoadLevel("Ascend Level"));
+
     }
     public void Quit()
     {

@@ -7,14 +7,9 @@ public class DeathPlane : MonoBehaviour
     GameObject player;
     Rigidbody2D rb;
     GameObject[] objects;
+    GameObject canvas;
 
-    private void Awake()
-    {
-        player = GameObject.FindWithTag("Player");
-        rb = player.GetComponent<Rigidbody2D>();
-
-    }
-
+    public LevelLoader levelLoader;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -24,19 +19,31 @@ public class DeathPlane : MonoBehaviour
         {
 
 
-            objects = GameObject.FindGameObjectsWithTag("Moveable");
-            foreach (GameObject obj in objects)
-            {
-                obj.GetComponent<ObjectReset>().Reset();
+            rb = other.attachedRigidbody;
+            StartCoroutine(levelLoader.DeathTransition());
+            Invoke(nameof(PlayerDeath), levelLoader.transitionTime - 0.2f);
 
-            }
-
-
-
-            rb.transform.position = Player.LastCheckpoint;
-            other.attachedRigidbody.velocity = Vector2.zero;
         }
 
 
+
     }
+
+    void PlayerDeath()
+    {
+
+        
+
+        objects = GameObject.FindGameObjectsWithTag("Moveable");
+        foreach (GameObject obj in objects)
+        {
+            obj.GetComponent<ObjectReset>().Reset();
+
+        }
+
+        rb.transform.position = Player.LastCheckpoint;
+        rb.velocity = Vector2.zero;
+
+    }
+
 }

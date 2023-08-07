@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public MenuInputSwitcher menuInputSwitcher;
     public static bool GameIsPaused = false;
     public GameObject settingsMenu;
+    public LevelLoader levelLoader;
 
     void Awake()
     {
@@ -49,8 +50,8 @@ public class PauseMenu : MonoBehaviour
     public void MainMenu()
     {
 
-
-        SceneManager.LoadScene("Main Menu");
+        Pause();
+        StartCoroutine(levelLoader.LoadLevel("Main Menu"));
 
     }
 

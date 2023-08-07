@@ -17,7 +17,8 @@ public class Abilities : MonoBehaviour
     float distance;
     bool isRaycasting = false;
     public LayerMask objectLayer;
-    bool hasFlipped = false;
+    public LayerMask groundLayer;
+
 
     // Kinesis variables
     public float kinesisRange = 20f;
@@ -44,7 +45,6 @@ public class Abilities : MonoBehaviour
     public static bool isSkating = false;
     public static bool isSkateJumping = false;
 
-    bool changedDirection = false;
 
     private void Awake()
     {

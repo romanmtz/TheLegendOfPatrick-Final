@@ -26,7 +26,7 @@ public class PlayerInputController : MonoBehaviour
         }
         
 
-        if (!PauseMenu.GameIsPaused)
+        if (!PauseMenu.GameIsPaused && !Player.isDialogue)
         {
             roman.Movement(Input.GetAxisRaw("Horizontal"), Input.GetButtonDown("Jump"), Input.GetButtonUp("Jump"));
         }
@@ -72,7 +72,7 @@ public class PlayerInputController : MonoBehaviour
 
 
 
-        if (!PauseMenu.GameIsPaused)
+        if (!PauseMenu.GameIsPaused && !Player.isDialogue)
         {
             amenu.Choose(Input.GetButton("Abilities"));
         }
