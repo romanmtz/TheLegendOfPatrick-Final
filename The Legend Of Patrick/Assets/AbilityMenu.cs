@@ -11,7 +11,7 @@ public class AbilityMenu : MonoBehaviour
     public GameObject abilityMenuUI;
     public GameObject abilityFirstButton;
     public GameObject ascendButton;
-    public GameObject kinisisButton;
+    public GameObject kinesisButton;
     public GameObject reverseButton;
     public GameObject cryosisButton;
     public MenuInputSwitcher menuInputSwitcher;
@@ -90,13 +90,15 @@ public class AbilityMenu : MonoBehaviour
         if (isButtonSelected(ascendButton))
         {
             abilitytext.text = "ascend mode";
+            abilitytext.color = new Color(0.6981132f,0.3187611f,0.6594009f,1f);
             AbilityMode = "ascend";
         }
 
-        if (isButtonSelected(kinisisButton))
+        if (isButtonSelected(kinesisButton))
         {
 
             abilitytext.text = "kinesis mode";
+            abilitytext.color = new Color(0.8113208f,0.2264098f,0.125525f,1f);
             AbilityMode = "kinesis";
 
         }
@@ -104,6 +106,7 @@ public class AbilityMenu : MonoBehaviour
         {
 
             abilitytext.text = "cryosis mode";
+            abilitytext.color = new Color(0.1803922f,0.5744293f,0.8196079f,1f);
             AbilityMode = "cryosis";
 
         }
@@ -111,6 +114,7 @@ public class AbilityMenu : MonoBehaviour
         {
 
             abilitytext.text = "reverse mode";
+            abilitytext.color = new Color(0.1353685f,0.6132076f,0.226305f,1f);
             AbilityMode = "reverse";
 
         }

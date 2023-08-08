@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cryosis Level.unity
     guid: 02125d579d54dff4ea7609580f1b7459
+  - enabled: 1
+    path: Assets/Scenes/EndOfDemo.unity
+    guid: 32d70036d734b4446bacc15d9e006684
   m_configObjects: {}

@@ -15984,6 +15984,165 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &367254932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 367254937}
+  - component: {fileID: 367254936}
+  - component: {fileID: 367254935}
+  - component: {fileID: 367254934}
+  - component: {fileID: 367254933}
+  m_Layer: 0
+  m_Name: Item
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &367254933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367254932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4125c5244ce7c734b92124fef0a5f8a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: {fileID: 1673786974}
+--- !u!114 &367254934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367254932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f2414d02f93064cb6ea3bd781c9cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0.11, y: -0.08}
+  shadowColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!61 &367254935
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367254932}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.014608383, y: 0.029216766}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 2
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6201744, y: 0.6493912}
+  m_EdgeRadius: 0
+--- !u!212 &367254936
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367254932}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -1429170293, guid: 3061986db4025134ca0aa3293337babb, type: 3}
+  m_Color: {r: 0, g: 1, b: 0.7992163, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 2
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &367254937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367254932}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.74, y: -4.58, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &374490927
 GameObject:
   m_ObjectHideFlags: 0
@@ -18184,10 +18343,6 @@ PrefabInstance:
     - target: {fileID: 1248694699689350697, guid: 5865ff89f9b0f554f8e5bdf69dab9134, type: 3}
       propertyPath: m_Name
       value: LevelLoader
-      objectReference: {fileID: 0}
-    - target: {fileID: 4127600315124433915, guid: 5865ff89f9b0f554f8e5bdf69dab9134, type: 3}
-      propertyPath: transitionTime
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21871,6 +22026,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2110041343424194, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -45.319946
+      objectReference: {fileID: 0}
+    - target: {fileID: 34303994944420756, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: kinesisButton
+      value: 
+      objectReference: {fileID: 554327993}
     - target: {fileID: 834879609934201578, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
       propertyPath: m_audioClip
       value: 
@@ -21895,6 +22058,65 @@ PrefabInstance:
       propertyPath: levelLoader
       value: 
       objectReference: {fileID: 463805616}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[0]
+      value: 'You find another gem along with a note that reads:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[1]
+      value: '"Patrick, I''m sorry I didn''t tell you sooner..."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[2]
+      value: '"...When discovering the ability gems, I was given a warning."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[3]
+      value: '"...If I ever were to give up their power I would surely lose myself." '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[4]
+      value: '"...At the time I thought nothing of it. I thought there would be no
+        circumstance in which I would give them up."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[5]
+      value: '"...However, our predicament is dire and my life will fade shortly."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[6]
+      value: '"...I know that I am a terrible person for forsaking you, but there
+        is no other person who has the heart to use them then you:"'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[7]
+      value: '"...the Princess''s personal guard..."'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[8]
+      value: '"...The bravest knight in Midrun." - Anonymous'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[9]
+      value: You can now choose Cryosis Mode from the Ability Menu.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[10]
+      value: While pressing The X Button or Shift on ice the ability will activate.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[11]
+      value: While the ability is active the ice will become slippery and your speed
+        and jump height will increase...
+      objectReference: {fileID: 0}
+    - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+      propertyPath: lines.Array.data[12]
+      value: The more you speed up the farther you will jump.
+      objectReference: {fileID: 0}
     - target: {fileID: 7420956359694064060, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -21947,6 +22169,11 @@ PrefabInstance:
 --- !u!4 &554327992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4452831330399239077, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+  m_PrefabInstance: {fileID: 554327991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &554327993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8039227004103272737, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
   m_PrefabInstance: {fileID: 554327991}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &556435316
@@ -63141,6 +63368,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1673786974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
+  m_PrefabInstance: {fileID: 554327991}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26ea2771d67e044bb27d356c6bc12de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1675700856
 GameObject:
   m_ObjectHideFlags: 0
@@ -78418,7 +78656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelLoader: {fileID: 463805616}
-  levelName: Reverse Level
+  levelName: EndOfDemo
 --- !u!114 &7603238669134313734
 MonoBehaviour:
   m_ObjectHideFlags: 0

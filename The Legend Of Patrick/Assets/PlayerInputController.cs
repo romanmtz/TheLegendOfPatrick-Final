@@ -20,11 +20,12 @@ public class PlayerInputController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Pause") && !AbilityMenu.GameIsChoose)
+        if (Input.GetButtonDown("Pause") && !AbilityMenu.GameIsChoose && !Player.isDialogue)
         {
             menu.Pause();
         }
-        
+
+        if(!AbilityMenu.GameIsChoose){
 
         if (!PauseMenu.GameIsPaused && !Player.isDialogue)
         {
@@ -45,19 +46,22 @@ public class PlayerInputController : MonoBehaviour
 
         }
 
-        if(AbilityMenu.AbilityMode == "reverse"){
+        if (AbilityMenu.AbilityMode == "reverse")
+        {
 
-            abilities.Reverse(Input.mousePosition, Input.GetButton("Fire"),Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            abilities.Reverse(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         }
-        if(AbilityMenu.AbilityMode == "cryosis"){
+        if (AbilityMenu.AbilityMode == "cryosis")
+        {
 
             abilities.Cryosis(Input.GetButton("Fire"));
 
         }
 
 
-
+        
+        }
 
 
 
@@ -71,11 +75,20 @@ public class PlayerInputController : MonoBehaviour
     {
 
 
-
         if (!PauseMenu.GameIsPaused && !Player.isDialogue)
         {
             amenu.Choose(Input.GetButton("Abilities"));
         }
+        else{
+
+
+            amenu.Choose(false);
+
+            
+        }
+
+  
+
 
 
     }
