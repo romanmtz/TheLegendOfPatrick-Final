@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject settingsMenu;
     public LevelLoader levelLoader;
+    public static bool MenuBlock;
 
     void Awake()
     {
@@ -24,24 +25,26 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
 
-
-        if (Time.timeScale != 0)
+        if (!MenuBlock)
         {
-            pauseMenuUI.SetActive(true);
-            Time.timeScale = 0;
-            GameIsPaused = true;
+            if (Time.timeScale != 0)
+            {
+                pauseMenuUI.SetActive(true);
+                Time.timeScale = 0;
+                GameIsPaused = true;
 
-            menuInputSwitcher.SwitchToPauseEventSystem();
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+                menuInputSwitcher.SwitchToPauseEventSystem();
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(pauseFirstButton);
 
-        }
-        else
-        {
-            pauseMenuUI.SetActive(false);
-            Time.timeScale = 1;
-            settingsMenu.SetActive(false);
-            GameIsPaused = false;
+            }
+            else
+            {
+                pauseMenuUI.SetActive(false);
+                Time.timeScale = 1;
+                settingsMenu.SetActive(false);
+                GameIsPaused = false;
+            }
         }
 
     }

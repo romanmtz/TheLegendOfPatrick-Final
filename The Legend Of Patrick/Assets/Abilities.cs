@@ -9,39 +9,42 @@ public class Abilities : MonoBehaviour
     public AudioClip ascendSFX;
     public AudioClip kinesisSFX;
     public AudioClip reverseSFX;
-
+    public LayerMask objectLayer;
+    //Ascend variables
     public float ascendRange = 5f;
+
 
     //Raycast variables
     Vector2 direction;
     float distance;
     bool isRaycasting = false;
-    public LayerMask objectLayer;
-    public LayerMask groundLayer;
+    public GameObject virtualMouse;
+    public float cursorSensitivity = 0.002f;
+   
 
 
     // Kinesis variables
-    public float kinesisRange = 20f;
-    public GameObject virtualMouse;
-    bool hasMovingObject = false;
-    Vector2 previousScreenPosition;
-    public float cursorSensitivity = 0.002f;
     Rigidbody2D movingObject;
+    bool hasMovingObject = false;
+    public float kinesisRange = 20f;
+    
+    
+    
+    
 
     // Reverse variables
-    public float reverseRange = 20f;
-    GameObject reversingObject = null;
     TimeBody tb;
-    GameObject previousReversingObject;
+    GameObject reversingObject = null;
     bool hasTimeBody = false;
     bool isReversing = false;
+    public float reverseRange = 20f;
 
     // Cryosis variables
     GameObject icedObject;
     IceBody ib;
+    bool hasIceBody = false;
     public float cryosisSpeed = 18f;
     public static bool onIce = false;
-    bool hasIceBody = false;
     public static bool isSkating = false;
     public static bool isSkateJumping = false;
 
@@ -68,8 +71,6 @@ public class Abilities : MonoBehaviour
     RaycastHit2D Raycast(Vector3 mousePosition, float horizontal, float vertical)
     {
         RaycastHit2D hit;
-        RaycastHit2D playerHit;
-
 
         isRaycasting = true;
 
@@ -86,14 +87,12 @@ public class Abilities : MonoBehaviour
         {
             Debug.DrawRay(transform.position + new Vector3(0.5f, 0f), direction * distance);
             hit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance, objectLayer);
-            playerHit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance);
 
         }
         else
         {
             Debug.DrawRay(transform.position + new Vector3(-0.5f, 0f), direction * distance);
             hit = Physics2D.Raycast(transform.position + new Vector3(-0.5f, 0f), direction, distance, objectLayer);
-            playerHit = Physics2D.Raycast(transform.position + new Vector3(0.5f, 0f), direction, distance);
 
         }
 
@@ -158,8 +157,6 @@ public class Abilities : MonoBehaviour
                 }
 
 
-                //add a speed limiter later
-
                 if (movingObject.transform.rotation == Quaternion.identity)
                     movingObject.freezeRotation = true;
             }
@@ -168,7 +165,6 @@ public class Abilities : MonoBehaviour
         else
         {
 
-            // AudioHandler.singleton.StopLoop(kinesisSFX);
             AbilityMenu.MenuBlock = false;
             if (hasMovingObject)
             {
@@ -205,7 +201,6 @@ public class Abilities : MonoBehaviour
 
         if (hold)
         {
-
 
             AudioHandler.singleton.LoopSound(kinesisSFX);
 

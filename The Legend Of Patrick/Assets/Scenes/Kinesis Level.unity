@@ -3642,7 +3642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
       propertyPath: lines.Array.data[3]
-      value: '"...Each of them corresponds with a unique abiliity such as the ability
+      value: '"...Each of them corresponds with a unique ability such as the power
         to levitate objects with your mind!"'
       objectReference: {fileID: 0}
     - target: {fileID: 7372871401238738870, guid: 55f23bf5e3d63834d873cab0b6df49b4, type: 3}
@@ -12997,7 +12997,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1429170293, guid: 3061986db4025134ca0aa3293337babb, type: 3}
   m_Color: {r: 1, g: 0.39999998, b: 0.39999998, a: 1}
   m_FlipX: 0

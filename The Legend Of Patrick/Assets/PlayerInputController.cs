@@ -25,45 +25,40 @@ public class PlayerInputController : MonoBehaviour
             menu.Pause();
         }
 
-        if(!AbilityMenu.GameIsChoose){
 
-        if (!PauseMenu.GameIsPaused && !Player.isDialogue)
-        {
-            roman.Movement(Input.GetAxisRaw("Horizontal"), Input.GetButtonDown("Jump"), Input.GetButtonUp("Jump"));
-        }
+            if (!PauseMenu.GameIsPaused && !Player.isDialogue)
+            {
+                roman.Movement(Input.GetAxisRaw("Horizontal"), Input.GetButtonDown("Jump"), Input.GetButtonUp("Jump"));
+            }
 
-        if (AbilityMenu.AbilityMode == "ascend")
-        {
+            if (AbilityMenu.AbilityMode == "ascend")
+            {
 
-            abilities.Ascend(Input.GetButtonUp("Fire"));
+                abilities.Ascend(Input.GetButtonUp("Fire"));
 
-        }
+            }
 
-        if (AbilityMenu.AbilityMode == "kinesis")
-        {
-            // Cursor.visible = false;
-            abilities.Kinesis(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            if (AbilityMenu.AbilityMode == "kinesis")
+            {
+                // Cursor.visible = false;
+                abilities.Kinesis(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-        }
+            }
 
-        if (AbilityMenu.AbilityMode == "reverse")
-        {
+            if (AbilityMenu.AbilityMode == "reverse")
+            {
 
-            abilities.Reverse(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+                abilities.Reverse(Input.mousePosition, Input.GetButton("Fire"), Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-        }
-        if (AbilityMenu.AbilityMode == "cryosis")
-        {
+            }
+            if (AbilityMenu.AbilityMode == "cryosis")
+            {
 
-            abilities.Cryosis(Input.GetButton("Fire"));
+                abilities.Cryosis(Input.GetButton("Fire"));
 
-        }
-
+            }
 
         
-        }
-
-
 
         if (PauseMenu.GameIsPaused)
             Debug.Log("GameIsPaused");
@@ -79,21 +74,13 @@ public class PlayerInputController : MonoBehaviour
         {
             amenu.Choose(Input.GetButton("Abilities"));
         }
-        else{
-
+        else
+        {
 
             amenu.Choose(false);
 
-            
         }
 
-  
-
-
-
     }
-
-
-
 
 }
